@@ -5,9 +5,14 @@ class Item(models.Model):
     title = models.CharField(max_length=200)
     description = models.TextField()
     pub_date = models.DateTimeField(auto_now_add=True)
-    price = models.CharField(max_length=200, verbose_name='Новая цена')
-    old_price = models.CharField(
-        max_length=200,
+    price = models.DecimalField(
+        max_digits=8,
+        decimal_places=2,
+        verbose_name='Новая цена'
+    )
+    old_price = models.DecimalField(
+        max_digits=8,
+        decimal_places=2,
         verbose_name='Старая цена',
         blank=True,
         null=True
