@@ -2,7 +2,7 @@ from django.contrib import admin
 from .models import Item
 
 class ItemAdmin(admin.ModelAdmin):
-    list_display = ('title', 'description', 'price','old_price', 'tag_list')
+    list_display = ('title', 'description', 'price', 'old_price', 'is_available', 'tag_list')
 
     def get_queryset(self, request):
         return super().get_queryset(request).prefetch_related('tags')

@@ -2,7 +2,7 @@ from django.db import models
 from taggit.managers import TaggableManager
 
 class Item(models.Model):
-    title = models.CharField(max_length=200)
+    title = models.CharField(max_length=200, unique=True)
     description = models.TextField()
     pub_date = models.DateTimeField(auto_now_add=True)
     price = models.DecimalField(
@@ -22,6 +22,7 @@ class Item(models.Model):
         upload_to='posts/',
         blank=True
     )
+    is_available = models.BooleanField(default=True)
     tags = TaggableManager()
 
     def __str__(self):
