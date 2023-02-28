@@ -1,4 +1,41 @@
-</h1>Главная страница<h1>
+{% extends "base.html" %}
+{% block content %}
+{% load static %}
+
+
+<header>
+    <h1>OnlineStore: Онлайн-магазин для всех ваших потребностей<br /></h1>
+    <p>Мой проект - это современный интернет-магазин, который был разработан с использованием передовых технологий веб-разработки. Использовался язык программирования Python и его фреймворк Django для создания серверной части сайта.</p>
+    <p>Для создания пользовательского интерфейса были использованы языки HTML, CSS и JavaScript. Большее количество шаблонов было взято с <a href="http://html5up.net">HTML5 UP</a></p>
+    <p>Я также использовал СУБД SQLite для хранения данных, таких как информация о продуктах и заказах.</p>
+</header>
+
+<section class="tiles">
     {% for item in items %}
-    </li>{{item.title}}<li>
+    <article class="style{{ range|random }}">
+        <span class="image">
+            <img src="{% static "images/pic01.jpg" %}" alt="" />
+        </span>
+        <a href="{% url 'item_details' item.pk %}">
+            <div class="tag">
+                <object>
+                <img src="{% static "images/tag_image.jpg" %}" width="10" height="10" alt="" /> 
+                {% for tag in item.tags.all %}
+                    {% if not forloop.last %}
+                        <a href="#category" style="color: white">{{ tag.name }}, </a>
+                    {% else %}
+                        <a href="#category"style="color: white">{{ tag.name }}</a>
+                    {% endif %}
+                {% endfor %}
+                </object><br />
+            </div>
+            <h2>{{ item.title }}</h2>
+            <div class="content">
+                <p>{{ item.description|truncatechars:150 }}</p>
+            </div>
+        </a>
+    </article>
     {% endfor %}
+</section>
+
+{% endblock %} 
