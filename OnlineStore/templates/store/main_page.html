@@ -19,12 +19,12 @@
         <a href="{% url 'item_details' item.pk %}">
             <div class="tag">
                 <object>
-                <img src="{% static "images/tag_image.jpg" %}" width="10" height="10" alt="" /> 
+                <img src="{% static "images/tag2.jpg" %}" width="10" height="10" alt="" /> 
                 {% for tag in item.tags.all %}
                     {% if not forloop.last %}
-                        <a href="#category" style="color: white">{{ tag.name }}, </a>
-                    {% else %}
-                        <a href="#category"style="color: white">{{ tag.name }}</a>
+                        <a href="{% url 'tag_details' tag.slug %}" style="color: white">{{ tag }}, </a>
+                    {% else %}  
+                        <a href="{% url 'tag_details' tag.slug %}" style="color: white">{{ tag }}</a>
                     {% endif %}
                 {% endfor %}
                 </object><br />
