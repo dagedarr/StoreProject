@@ -1,0 +1,37 @@
+{% load static %}
+<header id="header">
+    <div class="inner">
+
+        <!-- Logo -->
+            <a href="{% url 'store:home' %}" class="logo">
+                <span class="symbol"><img src="{% static "images/logo.svg" %}" alt="" /></span><span class="title">OnlineStore</span>
+            </a>
+
+        <!-- Nav -->
+                <nav>
+                    <ul>
+                        <li><a href="#menu">Menu</a></li>
+                    </ul>
+                    <br>
+                    <ul class="actions">
+                        <li>
+                            <a href="/cart">
+                            <img src ="{% static "images/cart.jpg" %}" width="40" height="40" ></a>
+                        </li>
+                    </ul>
+                </nav>
+    </div>
+</header>
+
+<!-- Menu -->
+<nav id="menu">
+    <h2>Menu</h2>
+    <ul>
+        <li><a href="{% url 'store:tag_list' %}">All Categories</a></li>
+        <li><a href="{% url 'about:about_project' %}">About project</a></li>
+        <li><a href="{% url 'about:about_me' %}">About me</a></li>
+        <li><a href="generic.html">Consequat dolor</a></li>
+        <li><a href="elements.html">Elements</a></li>
+        
+    </ul>
+</nav>

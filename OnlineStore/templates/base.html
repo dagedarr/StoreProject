@@ -1,0 +1,42 @@
+<!DOCTYPE HTML>
+<!--
+	Phantom by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+{% load static %}
+<html>
+	<head>
+		<title>Artem Nalolin's Online Store</title>
+		<meta charset="utf-8" />
+		<link rel="icon" href="{% static "images/logo.svg" %}" >
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="{% static "assets/css/main.css"%}" />
+		<noscript><link rel="stylesheet" href="{% static "assets/css/noscript.css"%}" /></noscript>
+	</head>
+	<body class="is-preload">
+		<!-- Wrapper -->
+			<div id="wrapper">
+				<!-- Header -->
+                    {% include 'includes/header.html' %} 
+				<!-- Main -->
+					<div id="main">
+						<div class="inner">
+                            {% block content %}
+
+                            {% endblock %}
+							<!-- Paginator -->
+							{% if page_obj %}<div style="text-align: center;">{% include 'includes/paginator.html' %}</div>{% endif %}
+						</div>
+					</div>
+				<!-- Footer -->
+                	{% include 'includes/footer.html' %} 
+			</div>
+		<!-- Scripts -->
+			<script src={% static "assets/js/jquery.min.js"%}></script>
+			<script src={% static "assets/js/browser.min.js"%}></script>
+			<script src={% static "assets/js/breakpoints.min.js"%}></script>
+			<script src={% static "assets/js/util.js"%}></script>
+			<script src={% static "assets/js/main.js"%}></script>
+	</body>
+</html>
