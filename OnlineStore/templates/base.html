@@ -17,7 +17,6 @@
 	<body class="is-preload">
 		<!-- Wrapper -->
 			<div id="wrapper">
-
 				<!-- Header -->
                     {% include 'includes/header.html' %} 
 				<!-- Main -->
@@ -26,20 +25,18 @@
                             {% block content %}
 
                             {% endblock %}
+							<!-- Paginator -->
+							{% if page_obj %}<div style="text-align: center;">{% include 'includes/paginator.html' %}</div>{% endif %}
 						</div>
 					</div>
-
 				<!-- Footer -->
-                {% include 'includes/footer.html' %} 
-
+                	{% include 'includes/footer.html' %} 
 			</div>
-
 		<!-- Scripts -->
 			<script src={% static "assets/js/jquery.min.js"%}></script>
 			<script src={% static "assets/js/browser.min.js"%}></script>
 			<script src={% static "assets/js/breakpoints.min.js"%}></script>
 			<script src={% static "assets/js/util.js"%}></script>
 			<script src={% static "assets/js/main.js"%}></script>
-
 	</body>
 </html>

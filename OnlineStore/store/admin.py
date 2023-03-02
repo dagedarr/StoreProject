@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Item
+from .models import Item, ItemTag
 
 class ItemAdmin(admin.ModelAdmin):
     list_display = ('title', 'description', 'price', 'old_price', 'is_available', 'tag_list')
@@ -9,5 +9,15 @@ class ItemAdmin(admin.ModelAdmin):
 
     def tag_list(self, obj):
         return u", ".join(o.name for o in obj.tags.all())
+    
+
+class ItemTagAdmin(admin.ModelAdmin):
+    list_display = ('name', 'slug', 'description', 'item_list')
+
+    def item_list(self, obj):
+        return [Item.objects.get(pk=o.get('object_id')) for o in obj.items.all().values()]
+    
+ # 'id', 'image', 'items', 'name', 'objects', 'pk',
 
 admin.site.register(Item, ItemAdmin)
+admin.site.register(ItemTag, ItemTagAdmin)

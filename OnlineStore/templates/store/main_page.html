@@ -11,22 +11,18 @@
 </header>
 
 <section class="tiles">
-    {% for item in items %}
+    {% for item in page_obj %}
     <article class="style{{ range|random }}">
         <span class="image">
             <img src="{% static "images/pic01.jpg" %}" alt="" />
         </span>
         <a href="{% url 'item_details' item.pk %}">
             <div class="tag">
-                <object>
-                <img src="{% static "images/tag2.jpg" %}" width="10" height="10" alt="" /> 
-                {% for tag in item.tags.all %}
-                    {% if not forloop.last %}
-                        <a href="{% url 'tag_details' tag.slug %}" style="color: white">{{ tag }}, </a>
-                    {% else %}  
+                <object> 
+                    {% for tag in item.tags.all %}
                         <a href="{% url 'tag_details' tag.slug %}" style="color: white">{{ tag }}</a>
-                    {% endif %}
-                {% endfor %}
+                        {% if not forloop.last %},{% endif %}
+                    {% endfor %}
                 </object><br />
             </div>
             <h2>{{ item.title }}</h2>
@@ -37,5 +33,4 @@
     </article>
     {% endfor %}
 </section>
-
 {% endblock %} 
