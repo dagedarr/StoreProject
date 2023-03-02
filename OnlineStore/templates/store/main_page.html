@@ -7,7 +7,7 @@
     <h1>OnlineStore: Онлайн-магазин для всех ваших потребностей<br /></h1>
     <p>Мой проект - это современный интернет-магазин, который был разработан с использованием передовых технологий веб-разработки. Использовался язык программирования Python и его фреймворк Django для создания серверной части сайта.</p>
     <p>Для создания пользовательского интерфейса были использованы языки HTML, CSS и JavaScript. Большее количество шаблонов было взято с <a href="http://html5up.net">HTML5 UP</a></p>
-    <p>Я также использовал СУБД SQLite для хранения данных, таких как информация о продуктах и заказах.</p>
+    <p>Я также использовал SQLite для хранения данных, таких как информация о продуктах и заказах.</p>
 </header>
 
 <section class="tiles">
@@ -16,11 +16,11 @@
         <span class="image">
             <img src="{% static "images/pic01.jpg" %}" alt="" />
         </span>
-        <a href="{% url 'item_details' item.pk %}">
+        <a href="{% url 'store:item_details' item.pk %}">
             <div class="tag">
                 <object> 
                     {% for tag in item.tags.all %}
-                        <a href="{% url 'tag_details' tag.slug %}" style="color: white">{{ tag }}</a>
+                        <a href="{% url 'store:tag_details' tag.slug %}" style="color: white">{{ tag }}</a>
                         {% if not forloop.last %},{% endif %}
                     {% endfor %}
                 </object><br />

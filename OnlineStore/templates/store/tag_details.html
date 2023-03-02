@@ -3,10 +3,10 @@
 {% load static %}
     <h2>{{ tag.name }}</h2>
     Количество товаров:&ensp;{{ tag.items.count }}
-    <p><a href="{% url 'tag_list'%}"><b>Все категории</b></a></p>
+    <p><a href="{% url 'store:tag_list'%}"><b>Все категории</b></a></p>
     <hr>
-{% for item in items %}
-    <a href="{% url 'item_details' item.pk %}"><b>{{ item.title }}</b></a>
+{% for item in page_obj %}
+    <a href="{% url 'store:item_details' item.pk %}"><b>{{ item.title }}</b></a>
     <p><span class="image left"><img src="{% static "images/pic14.jpg" %}" alt="" /></span>{{ item.description }}</p>
     {% if item.old_price %}
         <p>Старая цена: <s>{{ item.old_price }} рублей</s></p>
@@ -19,6 +19,4 @@
     </ul>
     {% if not forloop.last %}<hr>{% endif %}
 {% endfor %}
-
-
 {% endblock %} 

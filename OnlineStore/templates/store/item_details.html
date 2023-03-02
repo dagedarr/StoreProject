@@ -4,7 +4,7 @@
 <h2> {{ item.title }} </h2>
 <p>Товар принадлежит к категории
 {% for tag in item.tags.all %}
-    <b><a href="{% url 'tag_details' tag.slug %}">{{ tag }}</a></b>
+    <b><a href="{% url 'store:tag_details' tag.slug %}">{{ tag }}</a></b>
     {% if not forloop.last %},{% endif %}
 {% endfor %}
 </p>

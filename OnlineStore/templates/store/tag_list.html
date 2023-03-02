@@ -3,8 +3,8 @@
 {% load static %}
     <h2>Список всех категорий</h2>
     <hr>
-{% for tag in tags %}
-    <a href="{% url 'tag_details' tag.slug %}"><b>{{ tag.name }}</b></a>
+{% for tag in page_obj %}
+    <a href="{% url 'store:tag_details' tag.slug %}"><b>{{ tag.name }}</b></a>
     <p><span class="image right"><img src="{% static "images/pic14.jpg" %}" alt="" /></span>{{tag.description}}{{tag.description}}</p>
     {% if not forloop.last %}<hr>{% endif %}
 {% endfor %}

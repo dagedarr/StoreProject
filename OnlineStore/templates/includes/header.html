@@ -3,7 +3,7 @@
     <div class="inner">
 
         <!-- Logo -->
-            <a href="{% url 'home' %}" class="logo">
+            <a href="{% url 'store:home' %}" class="logo">
                 <span class="symbol"><img src="{% static "images/logo.svg" %}" alt="" /></span><span class="title">OnlineStore</span>
             </a>
 
@@ -27,9 +27,9 @@
 <nav id="menu">
     <h2>Menu</h2>
     <ul>
-        <li><a href="{% url 'tag_list' %}">All Categories</a></li>
+        <li><a href="{% url 'store:tag_list' %}">All Categories</a></li>
         <li><a href="{% url 'about:about_project' %}">About project</a></li>
-        <li><a href="{% url 'about:about_me' %}">My links</a></li>
+        <li><a href="{% url 'about:about_me' %}">About me</a></li>
         <li><a href="generic.html">Consequat dolor</a></li>
         <li><a href="elements.html">Elements</a></li>
         

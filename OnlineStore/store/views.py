@@ -1,17 +1,13 @@
-from django.core.paginator import Paginator
 from django.shortcuts import get_object_or_404, render
 from .models import Item, ItemTag
-
+from .paginator import paginator
 
 
 def store(request):
     items = Item.objects.all()
-    paginator = Paginator(items, 9)
-    page_number = request.GET.get('page')
-    page_obj = paginator.get_page(page_number)
-
-    context = {'page_obj': page_obj,
-               'range': [*range(1,7)],
+    context = {
+        'page_obj': paginator(request, items, 6),
+        'range': [*range(1,7)], # For random css styles
     }
 
     return render(request, 'store/main_page.html', context)
@@ -28,12 +24,13 @@ def tag_details(request, slug):
     items= Item.objects.filter(tags__in=[tag])
     context = {
         'tag': tag,
-        'items': items
+        'page_obj': paginator(request, items, 3),
         }
     return render(request, 'store/tag_details.html', context)
 
 def tag_list(request):
-    tags =ItemTag.objects.all()
-    context = {'tags': tags,
+    tags = ItemTag.objects.all()
+    context = {
+        'page_obj': paginator(request, tags, 6),
     }
     return render(request, 'store/tag_list.html', context)
