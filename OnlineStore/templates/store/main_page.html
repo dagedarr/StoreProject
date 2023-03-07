@@ -16,7 +16,7 @@
         <span class="image">
             <img src="{% static "images/pic01.jpg" %}" alt="" />
         </span>
-        <a href="{% url 'store:item_details' item.pk %}">
+        <a href="{% url 'store:item_details' item.slug %}">
             <div class="tag">
                 <object> 
                     {% for tag in item.tags.all %}

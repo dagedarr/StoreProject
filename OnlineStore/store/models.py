@@ -26,8 +26,13 @@ class TaggedItem(GenericTaggedItemBase):
 
 
 class Item(models.Model):
-    title = models.CharField(max_length=200, unique=True)
+    title = models.CharField(max_length=200)
     description = models.TextField()
+    slug = models.CharField(
+        max_length=50,
+        blank=True,
+        null=True
+    )
     pub_date = models.DateTimeField(auto_now_add=True)
     price = models.DecimalField(
         max_digits=8,

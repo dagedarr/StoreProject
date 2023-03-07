@@ -16,6 +16,6 @@
         <p>Цена: {{ item.price }} рублей </p>
     {% endif %}
     <ul class="actions">
-        <li><a href="/cart" class="button small">Добавить в корзину</a></li>
+        <li><a href="{% url 'cart:add_to_cart' item.slug %}"class="button small">Добавить в корзину</a></li>
     </ul>
 {% endblock %} 

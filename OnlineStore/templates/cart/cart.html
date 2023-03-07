@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<h1>Корзина</h1>
+{% if cart_items %}
+  <section>
+    <div class="table-wrapper">
+      <table class="alt">
+        <thead>
+          <tr>
+            <th>Название</th>
+            <th>Количество</th>
+            <th>Цена</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for cart_item in cart_items %}
+          <tr>
+            <td>{{ cart_item.item.title }}</td>
+            <td>{{ cart_item.quantity }}</td>
+            <td>{{ cart_item.total_price }}</td>
+            <td style="border: none; background-color: #ffffff;" align="center">
+              <a href="{% url 'cart:remove_from_cart'%}">
+                <img src ="{% static "images/garbage.svg" %}" width="25" height="25">
+              </a>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+        <tfoot>
+          <tr>
+            <td colspan="2"></td>
+            <td><u><b>{{ cart.total_price }}</b></u></td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  </section>
+  Оформить заказ
+{% else %}
+  <p>Ваша корзина пуста.</p>
+{% endif %}
+
+{% endblock %}
