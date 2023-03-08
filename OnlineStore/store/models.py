@@ -29,9 +29,8 @@ class Item(models.Model):
     title = models.CharField(max_length=200)
     description = models.TextField()
     slug = models.CharField(
+        unique=True,
         max_length=50,
-        blank=True,
-        null=True
     )
     pub_date = models.DateTimeField(auto_now_add=True)
     price = models.DecimalField(

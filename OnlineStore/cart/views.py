@@ -1,3 +1,4 @@
+from django.http import JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404
 
 from store.models import Item
@@ -33,10 +34,10 @@ def add_to_cart(request, item_slug):
     return redirect('cart:cart')
 
 
-def remove_from_cart(request, item_id):
+def remove_from_cart(request, item_slug):
     cart_item = CartItem.objects.get(
         cart=Cart.objects.get(user=request.user),
-        item=get_object_or_404(Item, id=item_id)
+        item=get_object_or_404(Item, slug=item_slug)
     )
 
     if cart_item.quantity > 1:
@@ -45,4 +46,30 @@ def remove_from_cart(request, item_id):
     else:
         cart_item.delete()
 
-    return redirect('store:cart')
+    return redirect('cart:cart')
+
+
+def update_cart_item(request):
+    if request.method == 'POST':
+        cart_item_id = request.POST.get('cart_item_id')
+        new_quantity = int(request.POST.get('new_quantity'))
+        cart_id = int(request.POST.get('cart_id'))
+
+        cart = Cart.objects.get(pk=cart_id)
+
+        print(111111111111111)
+
+        cart_item = get_object_or_404(CartItem, id=cart_item_id)
+        cart_item.quantity = new_quantity
+        cart_item.save()
+        
+        print(f'CART TP = {cart.total_price}')
+        return JsonResponse({
+            'success': True,
+            'cart_item_id': cart_item.id,
+            'cart_item_quantity': cart_item.quantity,
+            'cart_item_total_price': cart_item.total_price,
+            'cart_total_price': cart.total_price
+        })
+    else:
+        return JsonResponse({'success': False, 'error': 'Invalid request method'})

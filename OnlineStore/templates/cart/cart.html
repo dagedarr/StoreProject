@@ -16,12 +16,26 @@
         <tbody>
           {% for cart_item in cart_items %}
           <tr>
-            <td>{{ cart_item.item.title }}</td>
-            <td>{{ cart_item.quantity }}</td>
-            <td>{{ cart_item.total_price }}</td>
+            <td><a href="{% url 'store:item_details' cart_item.item.slug %}">{{ cart_item.item.title }}</a></td>
+            <td>
+                <div class="count">
+                  <span class="minus">—</span>
+                  <input type="number" value="{{ cart_item.quantity }}" class="quantity-input" data-cart-item-id="{{ cart_item.id }}">
+                  <span class="plus">+</span>
+                </div>
+                <form id="update-cart-item-form" method="POST" action="{% url 'cart:update_cart_item' %}" style="display:none;">
+                  {% csrf_token %}
+                  <input type="hidden" id="new-quantity-input" name="new_quantity">
+                  <input type="hidden" id="cart-item-id-input" name="cart_item_id">
+                </form>
+            </td>
+
+            <td class="cart-item-total-price" data-cart-item-id="{{ cart_item.id }}">{{ cart_item.total_price }}</td>
+
+
             <td style="border: none; background-color: #ffffff;" align="center">
-              <a href="{% url 'cart:remove_from_cart'%}">
-                <img src ="{% static "images/garbage.svg" %}" width="25" height="25">
+              <a href="{% url 'cart:remove_from_cart' cart_item.item.slug %}">
+                <img src ="{% static "images/garbage.svg" %}" width="25" height="25" >
               </a>
             </td>
           </tr>
@@ -30,13 +44,14 @@
         <tfoot>
           <tr>
             <td colspan="2"></td>
-            <td><u><b>{{ cart.total_price }}</b></u></td>
+            <td><u><b><span id="cart-total-price" data-cart-id="{{ cart.id }}">{{ cart.total_price }}</span></b></u></td>
           </tr>
         </tfoot>
       </table>
     </div>
   </section>
-  Оформить заказ
+  <a href="#" class="button">Оформить заказ</a>
+
 {% else %}
   <p>Ваша корзина пуста.</p>
 {% endif %}
