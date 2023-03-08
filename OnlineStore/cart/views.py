@@ -34,17 +34,12 @@ def add_to_cart(request, item_slug):
     return redirect('cart:cart')
 
 
-def remove_from_cart(request, item_slug):
+def delete_cart_item(request, item_slug):
     cart_item = CartItem.objects.get(
         cart=Cart.objects.get(user=request.user),
         item=get_object_or_404(Item, slug=item_slug)
     )
-
-    if cart_item.quantity > 1:
-        cart_item.quantity -= 1
-        cart_item.save()
-    else:
-        cart_item.delete()
+    cart_item.delete()
 
     return redirect('cart:cart')
 
