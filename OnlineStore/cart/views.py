@@ -6,6 +6,10 @@ from .models import Cart, CartItem
 
 
 def cart(request):
+    """
+    Представление для вывода всех объектов
+    товаров корзины и самой корзины.
+    """
     cart = Cart.objects.filter(user=request.user).first()
 
     #  cart = Cart.objects.get(user=request.user) (проверить когда у меня будет 2+ корзины, какая будет использована)
@@ -21,6 +25,10 @@ def cart(request):
 
 
 def add_to_cart(request, item_slug):
+    """
+    Представление для добавления товара в корзину
+    либо увеличения его количества на 1.
+    """
     item = get_object_or_404(Item, slug=item_slug)
     cart, _ = Cart.objects.get_or_create(user=request.user)
 
@@ -35,6 +43,9 @@ def add_to_cart(request, item_slug):
 
 
 def delete_cart_item(request, item_slug):
+    """
+    Представление для удаления объекта товара в корзине.
+    """
     cart_item = CartItem.objects.get(
         cart=Cart.objects.get(user=request.user),
         item=get_object_or_404(Item, slug=item_slug)
@@ -45,20 +56,20 @@ def delete_cart_item(request, item_slug):
 
 
 def update_cart_item(request):
-    if request.method == 'POST':
+    """
+    Представление для обработки AJAX-запроса
+    и последущего обновления БД и отправки на
+    страницу JSON-ответа с необходимыми данными.
+    """
+    if request.method == 'POST' and request.is_ajax():
         cart_item_id = request.POST.get('cart_item_id')
         new_quantity = int(request.POST.get('new_quantity'))
         cart_id = int(request.POST.get('cart_id'))
 
         cart = Cart.objects.get(pk=cart_id)
-
-        print(111111111111111)
-
         cart_item = get_object_or_404(CartItem, id=cart_item_id)
         cart_item.quantity = new_quantity
         cart_item.save()
-        
-        print(f'CART TP = {cart.total_price}')
         return JsonResponse({
             'success': True,
             'cart_item_id': cart_item.id,

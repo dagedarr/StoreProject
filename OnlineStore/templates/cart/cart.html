@@ -47,10 +47,11 @@
       </table>
     </div>
   </section>
-  <a href="#" class="button">Оформить заказ</a>
-
+  <div style="text-align: justify;">
+    <a href="{% url 'store:home' %}" style="float: left;" class="button">Продолжить покупки</a>
+    <a href="#" style="float: right;" class="button">Оформить заказ</a>
+  </div>
 {% else %}
   <p>Ваша корзина пуста.</p>
 {% endif %}
-
 {% endblock %}
