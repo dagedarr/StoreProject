@@ -8,6 +8,4 @@ urlpatterns = [
     path('add/<slug:item_slug>/', add_to_cart, name='add_to_cart'),
     path('delete/<slug:item_slug>/', delete_cart_item, name='delete_cart_item'),
     path('update_cart_item/', update_cart_item, name='update_cart_item'),
-
-    # path('cart/checkout/', views.checkout, name='checkout'),
 ]

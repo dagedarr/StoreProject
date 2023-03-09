@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<h1>Оплата</h1>
+
+<section>
+  <h2>Form</h2>
+  <div class="row">
+    <div class="col-md-8" style="width: 65%;">
+      <form method="post" action="#">
+        <div class="form-group">
+          <input type="text" name="demo-name" id="demo-name" value="" placeholder="Name" class="form-control" />
+        </div>
+        <div class="form-group">
+          <input type="email" name="demo-email" id="demo-email" value="" placeholder="Email" class="form-control" />
+        </div>
+      </form>
+    </div>
+    <div class="col-md-4" style="width: 35%; padding-left: 20px;">
+      <div class="sidebar">
+        <p>Здесь находится ваш контент для боковой панели.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+{% endblock %}

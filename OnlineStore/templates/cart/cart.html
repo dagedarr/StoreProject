@@ -49,7 +49,7 @@
   </section>
   <div style="text-align: justify;">
     <a href="{% url 'store:home' %}" style="float: left;" class="button">Продолжить покупки</a>
-    <a href="#" style="float: right;" class="button">Оформить заказ</a>
+    <a href="{% url 'checkout:checkout' %}" style="float: right;" class="button">Оформить заказ</a>
   </div>
 {% else %}
   <p>Ваша корзина пуста.</p>
