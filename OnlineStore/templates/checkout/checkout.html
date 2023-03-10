@@ -1,8 +1,12 @@
 {% extends 'base.html' %}
 {% load static %}
+{% block css %}
+  <link rel="stylesheet" href="{% static "assets/css/checkout.css"%}" >
+  <link rel="stylesheet" href="{% static "assets/css/courier-cart.css"%}" >
+{% endblock %}
 
 {% block content %}
-<h1>Оплата</h1>
+<h1>Оформление заказа</h1>
 <section>
   <div class="row">
     <div class="col-md-8" style="width: 65%; padding-right: 20px;">
@@ -36,12 +40,59 @@
       </div>
       <div><h2>Способ оплаты</h2></div>
       <div>
-        <p>Это место под оплату картой и выбор способа оплатой.
-           Это место под оплату картой и выбор способа оплатой.</p>
-      </div>
-    </div>
-  </div>
-</section>
+        <!-- Вынести в отдельное окно -->
+        <div class="col-4 col-12-small">
+          <input type="radio" id="demo-priority-low" name="demo-priority">
+          <label for="demo-priority-low">Low</label>
+        </div>
+        <div class="col-4 col-12-small">
+          <input type="radio" id="demo-priority-normal" name="demo-priority">
+          <label for="demo-priority-normal">Normal</label>
+        </div>
+        <div class="col-4 col-12-small">
+          <input type="radio" id="demo-priority-high" name="demo-priority">
+          <label for="demo-priority-high">High</label>
+        </div>
+        
+        <div class="overlay overlay-low-priority">
+          <div class="popup">
+            <h2>Low Priority Popup</h2>
+            <div class="popup-body">
+              <p>This is the popup content for Low priority button.</p>
+            </div>
+            <button class="close-btn">Close</button>
+          </div>
+        </div>
+        
+        <div class="overlay overlay-normal-priority">
+          <div class="popup">
+            <h2>Normal Priority Popup</h2>
+            <div class="popup-body">
+              <p>This is the popup content for Normal priority button.</p>
+            </div>
+            <button class="close-btn">Close</button>
+          </div>
+        </div>
+        
+        <div class="overlay overlay-high-priority">
+          <div class="popup">
+            <h2>High Priority Popup</h2>
+            <div class="popup-body">
+              <p>This is the popup content for High priority button.</p>
+            </div>
+            <button class="close-btn">Close</button>
+          </div>
+        </div>
+        
 
+          
+    
+</section>
+<!-- PayPal JavaScript SDK -->
+{% block js %}
+  <script src="https://www.paypal.com/sdk/js?client-id=test&currency=USD"></script>
+  <script src={% static "assets/js/checkout.js"%}></script>
+  <script src={% static "assets/js/popup.js"%}></script>
+{% endblock %}
 
 {% endblock %}

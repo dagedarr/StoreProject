@@ -11,12 +11,11 @@
 		<meta charset="utf-8" />
 		<link rel="icon" href="{% static "images/logo.svg" %}" >
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="{% static "assets/css/main.css"%}" />
-		<link rel="stylesheet" href="{% static "assets/css/cart.css"%}" />
-
-		<link rel="stylesheet" href="{% static "assets/css/order.css"%}" >
-		
+		<link rel="stylesheet" href="{% static "assets/css/main.css"%}" />		
 		<noscript><link rel="stylesheet" href="{% static "assets/css/noscript.css"%}" /></noscript>
+		{% block css %}
+		{% endblock %}
+
 	</head>
 	<body class="is-preload">
 		<!-- Wrapper -->
@@ -42,6 +41,7 @@
 			<script src={% static "assets/js/breakpoints.min.js"%}></script>
 			<script src={% static "assets/js/util.js"%}></script>
 			<script src={% static "assets/js/main.js"%}></script>
-			<script src={% static 'assets/js/ajax.js'%}></script>
+			{% block js %}
+			{% endblock %}
 	</body>
 </html>
