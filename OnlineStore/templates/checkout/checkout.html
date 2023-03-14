@@ -1,98 +1,96 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block css %}
-  <link rel="stylesheet" href="{% static "assets/css/checkout.css"%}" >
-  <link rel="stylesheet" href="{% static "assets/css/courier-cart.css"%}" >
+<link rel="stylesheet" href="{% static "assets/css/checkout.css"%}" />
 {% endblock %}
+
 
 {% block content %}
 <h1>Оформление заказа</h1>
-<section>
+{% if messages %}
+<div class="messages-container">
+  <ul class="messages">
+    {% for message in messages %}
+      <div {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</div>
+    {% endfor %}
+  </ul>
+</div>
+{% endif %}
+<form method="post" action="{% url 'checkout:create_order'%}">
+  {% csrf_token %}
+  <section>
   <div class="row">
-    <div class="col-md-8" style="width: 65%; padding-right: 20px;">
-      <form method="post" action="#">
-        <div><h2>Доставка</h2></div>
-        <div class="form-group">
-          <input type="text" name="first-name" id="first-name" value="" placeholder="Имя" class="form-control" />
-        </div>
-        <div class="form-group">
-          <input type="text" name="last-name" id="last-name" value="" placeholder="Фамилия" class="form-control" />
-        </div>
-        <div class="form-group">
-          <input type="email" name="email" id="email" value="" placeholder="Email" class="form-control" />
-        </div>
-        <div class="form-group">
-          <input type="tel" name="phone" id="phone" value="" placeholder="Телефон" class="form-control" />
-        </div>
-        <div class="form-group">
-          <input type="text" name="address-line-1" id="address-line-1" value="" placeholder="Адрес" class="form-control" />
-        </div>
-        <div class="form-group">
-          <input type="text" name="address-line-2" id="address-line-2" value="" placeholder="Адрес (дополнительно)" class="form-control" />
-        </div>
-      </form>
+    <div class="col-md-8" style="width: 60%; padding-right: 20px;">
+      <div><h2>Доставка</h2></div>
+      {% for field in form %}
+        {% if field.name != 'payment_method' %}
+          <div class="form-group">
+            {{ field }}
+            <div class="text-danger error-message">
+              {% for error in field.errors %}
+                <span>{{ error }}</span>
+              {% endfor %}
+            </div>
+          </div>
+        {% endif %}
+      {% endfor %}
     </div>
-    <div class="col-md-4" style="width: 35%;">
-      <div><h2>Ваш заказ</h2></div>
-      <div>
-        <p>Это место под краткое описание что в заказе.
-           Это место под краткое описание что в заказе.</p>
-      </div>
-      <div><h2>Способ оплаты</h2></div>
-      <div>
-        <!-- Вынести в отдельное окно -->
-        <div class="col-4 col-12-small">
-          <input type="radio" id="demo-priority-low" name="demo-priority">
-          <label for="demo-priority-low">Low</label>
+    <div class="col-md-4" style="width: 40%;">
+      <h2>Ваш заказ</h2>
+      {% if cart.items %}
+        <div class="table-wrapper">
+          <table class="alt">
+            <thead>
+              <tr>
+                <th>Название</th>
+                <th>Количество</th>
+                <th>Цена</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for cart_item in cart.items.all %}
+              <tr>
+                <td>{{ cart_item.item.title|truncatechars:20 }}</td>
+                <td>
+                    {{ cart_item.quantity }}
+                </td>
+                <td>{{ cart_item.total_price }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+            <tfoot>
+              <tr>
+                <td colspan="2"></td>
+                <td><b>{{ order.cart.total_price }}</b></td>
+              </tr>
+            </tfoot>
+          </table>
         </div>
-        <div class="col-4 col-12-small">
-          <input type="radio" id="demo-priority-normal" name="demo-priority">
-          <label for="demo-priority-normal">Normal</label>
-        </div>
-        <div class="col-4 col-12-small">
-          <input type="radio" id="demo-priority-high" name="demo-priority">
-          <label for="demo-priority-high">High</label>
-        </div>
-        
-        <div class="overlay overlay-low-priority">
-          <div class="popup">
-            <h2>Low Priority Popup</h2>
-            <div class="popup-body">
-              <p>This is the popup content for Low priority button.</p>
-            </div>
-            <button class="close-btn">Close</button>
-          </div>
-        </div>
-        
-        <div class="overlay overlay-normal-priority">
-          <div class="popup">
-            <h2>Normal Priority Popup</h2>
-            <div class="popup-body">
-              <p>This is the popup content for Normal priority button.</p>
-            </div>
-            <button class="close-btn">Close</button>
-          </div>
-        </div>
-        
-        <div class="overlay overlay-high-priority">
-          <div class="popup">
-            <h2>High Priority Popup</h2>
-            <div class="popup-body">
-              <p>This is the popup content for High priority button.</p>
-            </div>
-            <button class="close-btn">Close</button>
-          </div>
-        </div>
-        
-
-          
-    
-</section>
-<!-- PayPal JavaScript SDK -->
-{% block js %}
-  <script src="https://www.paypal.com/sdk/js?client-id=test&currency=USD"></script>
-  <script src={% static "assets/js/checkout.js"%}></script>
-  <script src={% static "assets/js/popup.js"%}></script>
+      {% else %}
+        Корзина пустая
+        <a href="{% url 'store:home' %}"  style="margin-bottom: 100px; margin-top: 50px;" class="button">Вернуться на главную</a>
+      {% endif %}
+      <div><h2>Выберите способ оплаты</h2></div>
+      {{ form.payment_method }}
+      <!-- Всплывающее окно для опции "Картой онлайн" -->
+      {% include 'checkout/popup.html' %}
+    </div>
+  </section>
+    <div class="actions" style="text-align: justify; margin-top: 100px;">
+      <input type="reset" value="Сбросить" style="float: left;">
+      {% if cart.total_price %}
+        <input type="submit" value="Оставить заказ" class="primary" style="float: right;">
+      {% else %}
+        <input type="submit" value="Оставить заказ" class="primary disabled" style="float: right;">
+      {% endif %}
+    </div>
+  </div>
+</form>
+<!-- <div id="paypal-button-container"></div> -->
 {% endblock %}
-
+{% block js %}
+<script src={% static "assets/js/checkout.js"%}></script>
+<!-- PayPal JavaScript SDK -->
+<script src="https://www.paypal.com/sdk/js?client-id=test&currency=USD"></script>
+<script src={% static "assets/js/payment.js"%}></script>
 {% endblock %}
