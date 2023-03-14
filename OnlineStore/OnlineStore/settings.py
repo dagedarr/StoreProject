@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'store.apps.StoreConfig',
     'cart.apps.CartConfig',
     'checkout.apps.CheckoutConfig',
+    'user.apps.UserConfig',
     'taggit',
 ]
 
