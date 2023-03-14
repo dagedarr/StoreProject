@@ -21,6 +21,9 @@ class Cart(models.Model):
 
     def __str__(self):
         return f"Cart {self.id} for {self.user.username}"
+    
+    def clear(self):
+        self.items.all().delete()
 
 
 class CartItem(models.Model):
