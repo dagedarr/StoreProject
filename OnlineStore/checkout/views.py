@@ -19,12 +19,14 @@ def checkout(request):
 
     return render(request, 'checkout/checkout.html', context)
 
+
 def thank_you(request, order_id):
     """
     Страница благодарности за заказ.
     """
     order = get_object_or_404(Order, id=order_id, user=request.user)
     return render(request, 'checkout/thank_you.html', {'order': order})
+
 
 def create_order(request):
     """
@@ -64,6 +66,7 @@ def create_order(request):
             return redirect('checkout:thank_you', order_id=order.id)
     else:
         form = OrderCreateForm()
-    messages.warning(request, 'Форма не была корректно обработана, введите данные еще раз')
+    messages.warning(
+        request, 'Форма не была корректно обработана, введите данные еще раз')
     context = {'form': form, 'cart': cart}
     return render(request, 'checkout/checkout.html', context)

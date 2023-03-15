@@ -16,7 +16,7 @@ class ShippingAddress(models.Model):
         {self.address_line_1} {self.address_line_2}
         Для: {self.first_name} {self.last_name},
         Почта: {self.email},
-        Телефон: {self.phone},
+        Телефон: {self.phone}
         """
 
 
@@ -45,6 +45,9 @@ class Order(models.Model):
         choices=STATUS_CHOICES,
         default='created',
     )
+
+    class Meta:
+        ordering = ['-created_at']
 
     @property
     def total_price(self):
