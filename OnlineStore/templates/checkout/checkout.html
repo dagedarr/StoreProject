@@ -37,7 +37,7 @@
     </div>
     <div class="col-md-4" style="width: 40%;">
       <h2>Ваш заказ</h2>
-      {% if cart.items %}
+      {% if cart.items.exists %}
         <div class="table-wrapper">
           <table class="alt">
             <thead>
@@ -78,7 +78,7 @@
   </section>
     <div class="actions" style="text-align: justify; margin-top: 100px;">
       <input type="reset" value="Сбросить" style="float: left;">
-      {% if cart.total_price %}
+      {% if cart.items.exists %}
         <input type="submit" value="Оставить заказ" class="primary" style="float: right;">
       {% else %}
         <input type="submit" value="Оставить заказ" class="primary disabled" style="float: right;">
@@ -86,7 +86,6 @@
     </div>
   </div>
 </form>
-<!-- <div id="paypal-button-container"></div> -->
 {% endblock %}
 {% block js %}
 <script src={% static "assets/js/checkout.js"%}></script>

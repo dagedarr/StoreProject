@@ -1,10 +1,5 @@
 from django import forms
-from .models import ShippingAddress, Order
-
-# class ShippingAddressForm(forms.ModelForm):
-#     class Meta:
-#         model = ShippingAddress
-#         fields = ['first_name', 'last_name', 'email', 'phone', 'address_line_1', 'address_line_2']
+from .models import Order
 
 
 class PlaceholderForm(forms.Form):
@@ -20,6 +15,9 @@ class OrderCreateForm(PlaceholderForm):
     email = forms.EmailField(help_text='Email')
     phone = forms.CharField(max_length=20, help_text='Телефон')
     address_line_1 = forms.CharField(max_length=100, help_text='Адрес')
-    address_line_2 = forms.CharField(max_length=100, required=False, help_text='Адрес (дополнительно)')
-
+    address_line_2 = forms.CharField(
+        max_length=100,
+        required=False,
+        help_text='Адрес (дополнительно)'
+    )
     payment_method = forms.ChoiceField(choices=Order.PAYMENT_METHOD_CHOICES)

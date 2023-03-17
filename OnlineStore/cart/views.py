@@ -1,10 +1,11 @@
+from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404
 
 from store.models import Item
 from .models import Cart, CartItem
 
-
+@login_required
 def cart(request):
     """
     Представление для вывода всех объектов
@@ -12,7 +13,6 @@ def cart(request):
     """
     cart = Cart.objects.filter(user=request.user).first()
 
-    #  cart = Cart.objects.get(user=request.user) (проверить когда у меня будет 2+ корзины, какая будет использована)
     if not cart:
         cart = Cart.objects.create(user=request.user)
 
@@ -23,7 +23,7 @@ def cart(request):
 
     return render(request, 'cart/cart.html', context)
 
-
+@login_required
 def add_to_cart(request, item_slug):
     """
     Представление для добавления товара в корзину
@@ -41,7 +41,7 @@ def add_to_cart(request, item_slug):
         cart_item.save()
     return redirect('cart:cart')
 
-
+@login_required
 def delete_cart_item(request, item_slug):
     """
     Представление для удаления объекта товара в корзине.
@@ -51,10 +51,9 @@ def delete_cart_item(request, item_slug):
         item=get_object_or_404(Item, slug=item_slug)
     )
     cart_item.delete()
-
     return redirect('cart:cart')
 
-
+@login_required
 def update_cart_item(request):
     """
     Представление для обработки AJAX-запроса
@@ -78,4 +77,6 @@ def update_cart_item(request):
             'cart_total_price': cart.total_price
         })
     else:
-        return JsonResponse({'success': False, 'error': 'Invalid request method'})
+        return JsonResponse({
+            'success': False, 'error': 'Invalid request method'
+        })

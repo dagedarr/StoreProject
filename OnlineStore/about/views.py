@@ -6,4 +6,4 @@ class AboutAuthorView(TemplateView):
 
 
 class AboutProjectView(TemplateView):
-    template_name = 'about/project.html' 
+    template_name = 'about/project.html'

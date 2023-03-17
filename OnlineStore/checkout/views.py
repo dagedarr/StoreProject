@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 
@@ -6,6 +7,7 @@ from .models import Order, OrderItem, ShippingAddress
 from cart.views import Cart
 
 
+@login_required
 def checkout(request):
     """
     Представление чекаута.
@@ -20,6 +22,7 @@ def checkout(request):
     return render(request, 'checkout/checkout.html', context)
 
 
+@login_required
 def thank_you(request, order_id):
     """
     Страница благодарности за заказ.
@@ -28,6 +31,7 @@ def thank_you(request, order_id):
     return render(request, 'checkout/thank_you.html', {'order': order})
 
 
+@login_required
 def create_order(request):
     """
     Создание экземпляров Order и ShippingAddress

@@ -14,14 +14,12 @@ class Cart(models.Model):
 
     @property
     def total_price(self):
-        total_price = 0
-        for cart_item in self.items.all():
-            total_price += cart_item.total_price
+        total_price = sum(item.total_price for item in self.items.all())
         return total_price
 
     def __str__(self):
         return f"Cart {self.id} for {self.user.username}"
-    
+
     def clear(self):
         self.items.all().delete()
 
@@ -41,4 +39,4 @@ class CartItem(models.Model):
         return total_price
 
     def __str__(self):
-        return f"{self.quantity} x {self.item.title} in {self.cart}"
+        return f"{self.quantity} x {self.item.title}"

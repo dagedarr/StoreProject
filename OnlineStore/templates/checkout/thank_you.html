@@ -1,15 +1,15 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h2>Спасибо за ваш заказ!</h2>
-    <p><strong>Содержимое заказа:</strong>
-        {% for item in order.items.all %}
-        <li>{{ item.quantity }} х {{ item.item.title }}</li>
-        {% endfor %}
-    </p>
-    <p><strong>Привезем по адресу:</strong></p>
-    <p>{{ order.shipping_address }}</p>
-    <div>
-      <a href="{% url 'user:profile' user.username %}" class="button">Мой профиль</a>
-    </div>
+<h2>Спасибо за ваш заказ!</h2>
+<p><strong>Содержимое заказа:</strong>
+{% for item in order.items.all %}
+  <li>{{ item.quantity }} х {{ item.item.title }}</li>
+{% endfor %}
+</p>
+<p><strong>Привезем по адресу:</strong></p>
+<p>{{ order.shipping_address }}</p>
+<div>
+  <a href="{% url 'users:user_orders' %}" class="button">Мои заказы</a>
+</div>
 {% endblock %}
