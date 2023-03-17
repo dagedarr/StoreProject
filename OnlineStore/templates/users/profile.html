@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Ваш профиль</h1>
+<p>Здравствуйте, {{ request.user.get_username }}. Всего у вас <strong>{{ request.user.orders.count }}</strong> заказов.</p>
+<p>Ваши заказы: <a href="{% url 'users:user_orders' %}">Перейти к заказам</a></p>
+<p>Если вы хотите выйти из системы: <a href="{% url 'users:logout' %}">Выйти</a></p>
+<p>Если вы хотите сменить пароль: <a href="{% url 'users:password_change' %}">Сменить пароль</a></p>
+{% endblock %}

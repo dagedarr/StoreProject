@@ -8,8 +8,9 @@ urlpatterns = [
     path('cart/', include('cart.urls')),
     path('about/', include('about.urls')),
     path('checkout/', include('checkout.urls')),
-    path('profile/', include('user.urls')),
+    path('users/', include('users.urls')),
     path('', include('store.urls')),
+    path('', include('django.contrib.auth.urls'))
 ]
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

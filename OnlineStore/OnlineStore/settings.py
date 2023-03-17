@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'store.apps.StoreConfig',
     'cart.apps.CartConfig',
     'checkout.apps.CheckoutConfig',
-    'user.apps.UserConfig',
+    'users.apps.UsersConfig',
     'taggit',
 ]
 
@@ -59,7 +59,7 @@ ROOT_URLCONF = 'OnlineStore.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates'),],
+        'DIRS': [os.path.join(BASE_DIR, 'templates'), ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -108,9 +108,8 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
-
-TIME_ZONE = 'UTC'
+LANGUAGE_CODE = 'ru'
+TIME_ZONE = 'Europe/Moscow'
 
 USE_I18N = True
 
@@ -135,3 +134,11 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Taggit settings
 TAGGIT_CASE_INSENSITIVE = True
+
+# Signup/Login
+LOGIN_URL = 'users:login'
+LOGIN_REDIRECT_URL = 'store:home'
+
+# Email
+EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
+EMAIL_FILE_PATH = os.path.join(BASE_DIR, 'sent_emails') 
