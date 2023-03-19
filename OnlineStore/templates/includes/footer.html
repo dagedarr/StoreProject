@@ -1,23 +1,25 @@
 <footer id="footer">
     <div class="inner">
         <section>
-            <h2>Get in touch</h2>
-            <form method="post" action="#">
+            <h2>Оставлись вопросы? Свяжитесь с нами</h2>
+            <form method="post" action="{% url 'users:feedback_processing'%}">
+                {% csrf_token %}
                 <div class="fields">
                     <div class="field half">
-                        <input type="text" name="name" id="name" placeholder="Name" />
+                        <input type="text" name="feedback_name" id="feedback_name" placeholder="Имя" />
                     </div>
                     <div class="field half">
-                        <input type="email" name="email" id="email" placeholder="Email" />
+                        <input type="email" name="feedback_email" id="feedback_email" placeholder="Почта" />
                     </div>
                     <div class="field">
-                        <textarea name="message" id="message" placeholder="Message"></textarea>
+                        <textarea name="feedback_message" id="feedback_message" placeholder="Сообщение"></textarea>
                     </div>
                 </div>
                 <ul class="actions">
-                    <li><input type="submit" value="Send" class="primary" /></li>
+                    <li><input type="submit" value="Отправить" class="primary" /></li>
                 </ul>
             </form>
+
         </section>
         <section>
             <h2>Follow</h2>

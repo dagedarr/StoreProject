@@ -1,12 +1,13 @@
 from django.contrib.auth.views import LoginView, LogoutView, PasswordResetCompleteView, PasswordResetView, PasswordChangeView, PasswordChangeDoneView, PasswordResetConfirmView, PasswordResetDoneView
 from django.urls import include, path, reverse_lazy
-from .views import profile, SignUp, user_orders
+from .views import profile, SignUp, user_orders, feedback_processing
 
 app_name = 'users'
 
 urlpatterns = [
     path('orders/', user_orders, name='user_orders'),
     path('profile/', profile, name='profile'),
+    path('feedback-processing/', feedback_processing, name='feedback_processing'),
     path(
         'auth/logout/',
         LogoutView.as_view(template_name='users/logged_out.html'),
