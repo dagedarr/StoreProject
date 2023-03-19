@@ -14,10 +14,7 @@ def checkout(request):
     """
     cart = Cart.objects.get(user=request.user)
     form = OrderCreateForm()
-    context = {
-        'cart': cart,
-        'form': form,
-    }
+    context = {'cart': cart, 'form': form}
 
     return render(request, 'checkout/checkout.html', context)
 
@@ -40,22 +37,22 @@ def create_order(request):
     """
     cart = get_object_or_404(Cart, user=request.user)
 
-    if request.method == 'POST':
+    if cart.items.exists() and request.method == 'POST':
         form = OrderCreateForm(request.POST)
         if form.is_valid():
-            shipping_address = ShippingAddress.objects.create(
+            order = Order.objects.create(
+                payment_method=form.cleaned_data['payment_method'],
+                user=request.user,
+            )
+
+            ShippingAddress.objects.create(
                 first_name=form.cleaned_data['first_name'],
                 last_name=form.cleaned_data['last_name'],
                 email=form.cleaned_data['email'],
                 phone=form.cleaned_data['phone'],
                 address_line_1=form.cleaned_data['address_line_1'],
                 address_line_2=form.cleaned_data['address_line_2'],
-            )
-
-            order = Order.objects.create(
-                payment_method=form.cleaned_data['payment_method'],
-                user=request.user,
-                shipping_address=shipping_address,
+                order=order,
             )
 
             for cart_item in cart.items.all():

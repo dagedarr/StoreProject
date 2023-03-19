@@ -4,23 +4,6 @@ from django.contrib.auth.models import User
 from store.models import Item
 
 
-class ShippingAddress(models.Model):
-    first_name = models.CharField(max_length=50)
-    last_name = models.CharField(max_length=50)
-    email = models.EmailField()
-    phone = models.CharField(max_length=20)
-    address_line_1 = models.CharField(max_length=200)
-    address_line_2 = models.CharField(max_length=200, blank=True, null=True)
-
-    def __str__(self):
-        return f"""
-        {self.address_line_1} {self.address_line_2}
-        Для: {self.first_name} {self.last_name},
-        Почта: {self.email},
-        Телефон: {self.phone}
-        """
-
-
 class Order(models.Model):
     PAYMENT_METHOD_CHOICES = [
         ('cash_courier', 'Наличными курьеру'),
@@ -41,8 +24,6 @@ class Order(models.Model):
     user = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name='orders')
     created_at = models.DateTimeField(auto_now_add=True)
-    shipping_address = models.OneToOneField(
-        ShippingAddress, on_delete=models.CASCADE)
     status = models.CharField(
         max_length=20,
         choices=STATUS_CHOICES,
@@ -54,9 +35,8 @@ class Order(models.Model):
 
     @property
     def total_price(self):
-        total_price = 0
-        for order_item in self.items.all():
-            total_price += order_item.total_price
+        total_price = sum(
+            order_item.total_price for order_item in self.items.all())
         return total_price
 
     def __str__(self):
@@ -77,3 +57,22 @@ class OrderItem(models.Model):
 
     def __str__(self):
         return f"{self.quantity} x {self.item.title} in Order {self.order.id}"
+
+
+class ShippingAddress(models.Model):
+    first_name = models.CharField(max_length=50)
+    last_name = models.CharField(max_length=50)
+    email = models.EmailField()
+    phone = models.CharField(max_length=20)
+    address_line_1 = models.CharField(max_length=200)
+    address_line_2 = models.CharField(max_length=200, blank=True, null=True)
+    order = models.OneToOneField(
+        Order, on_delete=models.CASCADE, related_name='shipping_address')
+
+    def __str__(self):
+        return f"""
+        {self.address_line_1} {self.address_line_2}
+        Для: {self.first_name} {self.last_name},
+        Почта: {self.email},
+        Телефон: {self.phone}
+        """
