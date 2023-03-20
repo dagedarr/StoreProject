@@ -50,7 +50,7 @@ class Item(models.Model):
         null=True,
     )
     image = models.ImageField(
-        'Картинка',
+        verbose_name='Изображение',
         upload_to='items/',
         blank=True,
     )

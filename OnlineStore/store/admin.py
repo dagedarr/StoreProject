@@ -7,7 +7,6 @@ class ItemAdmin(admin.ModelAdmin):
                     'old_price', 'is_available', 'tag_list',)
     search_fields = ('title', 'description', 'tags__name',)
     list_filter = ('is_available', 'tags',)
-    filter_horizontal = ('tags',)
 
     def short_description(self, obj):
         if len(obj.description) > 100:
