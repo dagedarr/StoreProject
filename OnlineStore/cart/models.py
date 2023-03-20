@@ -8,9 +8,15 @@ class Cart(models.Model):
     user = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
-        related_name='carts'
+        related_name='carts',
+        verbose_name='Покупатель',
     )
-    created_at = models.DateTimeField(auto_now_add=True)
+    created_at = models.DateTimeField(
+        auto_now_add=True, verbose_name='Дата создания',)
+
+    class Meta:
+        verbose_name = 'Корзина'
+        verbose_name_plural = 'Корзины'
 
     @property
     def total_price(self):
@@ -28,10 +34,20 @@ class CartItem(models.Model):
     cart = models.ForeignKey(
         Cart,
         on_delete=models.CASCADE,
-        related_name='items'
+        related_name='items',
+        verbose_name='Корзина',
     )
-    item = models.ForeignKey(Item, on_delete=models.CASCADE)
-    quantity = models.PositiveIntegerField(default=1)
+    item = models.ForeignKey(
+        Item,
+        on_delete=models.CASCADE,
+        verbose_name='Товар',
+    )
+    quantity = models.PositiveIntegerField(
+        default=1, verbose_name='Количество',)
+
+    class Meta:
+        verbose_name = 'Товар в корзине'
+        verbose_name_plural = 'Товары в корзине'
 
     @property
     def total_price(self):
