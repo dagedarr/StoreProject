@@ -17,8 +17,3 @@ class FeedbackForm(forms.ModelForm):
     class Meta:
         model = Feedback
         fields = ['feedback_name', 'feedback_email', 'feedback_message']
-        widgets = {
-            'feedback_name': forms.TextInput(attrs={'placeholder': 'Имя'}),
-            'feedback_email': forms.EmailInput(attrs={'placeholder': 'Почта'}),
-            'feedback_message': forms.Textarea(attrs={'placeholder': 'Сообщение'}),
-        }

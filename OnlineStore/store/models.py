@@ -6,15 +6,17 @@ from taggit.models import TagBase, GenericTaggedItemBase
 
 class ItemTag(TagBase):
     image = models.ImageField(
-        'Картинка тега',
         upload_to='posts/',
+        verbose_name='Изображение',
         blank=True
     )
-    description = models.TextField(blank=True)
+    description = models.TextField(
+        blank=True,
+        )
 
     class Meta:
-        verbose_name = _("Tag")
-        verbose_name_plural = _("Tags")
+        verbose_name = _("Категория")
+        verbose_name_plural = _("Категории")
 
 
 class TaggedItem(GenericTaggedItemBase):
@@ -36,21 +38,24 @@ class Item(models.Model):
     price = models.DecimalField(
         max_digits=8,
         decimal_places=2,
-        verbose_name='Новая цена'
+        verbose_name='Новая цена',
     )
     old_price = models.DecimalField(
         max_digits=8,
         decimal_places=2,
         verbose_name='Старая цена',
         blank=True,
-        null=True
+        null=True,
     )
     image = models.ImageField(
         'Картинка',
         upload_to='items/',
-        blank=True
+        blank=True,
     )
-    is_available = models.BooleanField(default=True)
+    is_available = models.BooleanField(
+        default=True,
+        verbose_name='Доступно',
+    )
     tags = TaggableManager(through=TaggedItem, related_name="tagged_items")
 
     def __str__(self):
