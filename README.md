@@ -1,3 +1,5 @@
+# https://natolin.pythonanywhere.com/
+
 # Интернет магазин на Django
 
 Это полноценный проект интернет-магазина, разработанный на Django.
