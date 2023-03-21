@@ -1,12 +1,12 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 from taggit.managers import TaggableManager
-from taggit.models import TagBase, GenericTaggedItemBase
+from taggit.models import GenericTaggedItemBase, TagBase
 
 
 class ItemTag(TagBase):
     image = models.ImageField(
-        upload_to='posts/',
+        upload_to='categories/',
         verbose_name='Изображение',
         blank=True
     )

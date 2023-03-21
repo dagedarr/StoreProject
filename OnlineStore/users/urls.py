@@ -1,6 +1,13 @@
-from django.contrib.auth.views import LoginView, LogoutView, PasswordResetCompleteView, PasswordResetView, PasswordChangeView, PasswordChangeDoneView, PasswordResetConfirmView, PasswordResetDoneView
-from django.urls import include, path, reverse_lazy
-from .views import profile, SignUp, user_orders, feedback_processing
+from django.contrib.auth.views import (LoginView, LogoutView,
+                                       PasswordChangeDoneView,
+                                       PasswordChangeView,
+                                       PasswordResetCompleteView,
+                                       PasswordResetConfirmView,
+                                       PasswordResetDoneView,
+                                       PasswordResetView)
+from django.urls import path, reverse_lazy
+
+from .views import SignUp, feedback_processing, profile, user_orders
 
 app_name = 'users'
 

@@ -1,4 +1,5 @@
 from django.urls import path
+
 from .views import checkout, create_order, thank_you
 
 app_name = 'checkout'

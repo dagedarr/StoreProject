@@ -1,6 +1,6 @@
 from django.urls import path
-from .views import item_details, store, tag_details, tag_list
 
+from .views import item_details, store, tag_details, tag_list
 
 app_name = 'store'
 

@@ -1,12 +1,12 @@
-import telegram
 import asyncio
 
+import telegram
 from django.contrib.auth.decorators import login_required
+from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import CreateView
-from django.shortcuts import render
 
-from OnlineStore.settings import TELEGRAM_TOKEN, TELEGRAM_CHAT_ID
+from OnlineStore.settings import TELEGRAM_CHAT_ID, TELEGRAM_TOKEN
 from checkout.models import Order
 from .forms import CreationForm, FeedbackForm
 from .models import Feedback
