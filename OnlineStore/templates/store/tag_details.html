@@ -8,16 +8,23 @@
     <hr>
 {% for item in page_obj %}
     <a href="{% url 'store:item_details' item.slug %}"><b>{{ item.title }}</b></a>
-    <p><span class="image left"><img src="{% static "images/pic14.jpg" %}" alt="" /></span>{{ item.description }}</p>
+    <p><span class="image left">
+        {% if item.image %}
+            <img src="{{ item.image.url }}" alt="" style="max-width: 200px; max-height: 200px;"/>
+        {% else %}
+            <img src="{% static "images/pic01.jpg" %}" alt="" />
+        {% endif %}
+        <a href="{% url 'cart:add_to_cart' item.slug %}" class="button small" style="margin-top:10px;">
+            Добавить в корзину</a>
+        </span>
+    </p>
+    <p>{{ item.description }}</p>
     {% if item.old_price %}
-        <p>Старая цена: <s>{{ item.old_price }} рублей</s></p>
-        <p>Новая цена: {{ item.price }} рублей </p>
+        <p>Старая цена: <s>{{ item.old_price }} рублей</s>
+        Новая цена: <b>{{ item.price }}</b> рублей </p>
     {% else %}
-        <p>Цена: {{ item.price }} рублей </p>
+        <p>Цена: <b>{{ item.price }}</b> рублей </p>
     {% endif %}
-    <ul class="actions">
-        <li><a href="/cart" class="button small">Добавить в корзину</a></li>
-    </ul>
     {% if not forloop.last %}<hr>{% endif %}
 {% endfor %}
 {% endblock %} 

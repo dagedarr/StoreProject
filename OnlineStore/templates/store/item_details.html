@@ -9,7 +9,11 @@
     {% if not forloop.last %},{% endif %}
 {% endfor %}
 </p>
-<p><span class="image left"><img src="{% static "images/pic14.jpg" %}" alt="" />
+{% if item.image %}
+    <p><span class="image left"><img src="{{ item.image.url }}" alt="" style="max-width: 200px; max-height: 200px;"/>
+{% else %}
+    <p><span class="image left"><img src="{% static "images/pic14.jpg" %}" alt="" />
+{% endif %}
     <a href="{% url 'cart:add_to_cart' item.slug %}" class="button small" style="margin-top:10px;">
         Добавить в корзину</a>
     </span>

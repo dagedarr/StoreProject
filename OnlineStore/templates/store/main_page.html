@@ -10,7 +10,11 @@
     {% for item in page_obj %}
     <article class="style{{ range|random }}">
         <span class="image">
+        {% if item.image %}
+            <img src="{{ item.image.url }}" alt="" style="width: 353px; height: 326px;" />
+        {% else %}
             <img src="{% static "images/pic01.jpg" %}" alt="" />
+        {% endif %}
         </span>
         <a href="{% url 'store:item_details' item.slug %}">
             <div class="tag">
