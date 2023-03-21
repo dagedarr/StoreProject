@@ -1,21 +1,24 @@
 {% extends "base.html" %}
+
 {% block content %}
 {% load static %}
-<h2> {{ item.title }} </h2>
+<h2>{{ item.title }}</h2>
 <p>Товар принадлежит к категории
 {% for tag in item.tags.all %}
     <b><a href="{% url 'store:tag_details' tag.slug %}">{{ tag }}</a></b>
     {% if not forloop.last %},{% endif %}
 {% endfor %}
 </p>
-<p><span class="image left"><img src="{% static "images/pic14.jpg" %}" alt="" /></span>{{ item.description }}</p>
-    {% if item.old_price %}
-        <p>Старая цена: <s>{{ item.old_price }} рублей</s></p>
-        <p>Новая цена: {{ item.price }} рублей </p>
-    {% else %}
-        <p>Цена: {{ item.price }} рублей </p>
-    {% endif %}
-    <ul class="actions">
-        <li><a href="{% url 'cart:add_to_cart' item.slug %}"class="button small">Добавить в корзину</a></li>
-    </ul>
+<p><span class="image left"><img src="{% static "images/pic14.jpg" %}" alt="" />
+    <a href="{% url 'cart:add_to_cart' item.slug %}" class="button small" style="margin-top:10px;">
+        Добавить в корзину</a>
+    </span>
+    {{ item.description }}{{ item.description }}
+</p>
+{% if item.old_price %}
+    <p>Старая цена: <s>{{ item.old_price }} рублей</s>
+    Новая цена: <b>{{ item.price }}</b> рублей </p>
+{% else %}
+    <p>Цена: <b>{{ item.price }}</b> рублей </p>
+{% endif %}
 {% endblock %} 

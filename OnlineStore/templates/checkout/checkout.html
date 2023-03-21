@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
+
 {% load static %}
 {% block css %}
 <link rel="stylesheet" href="{% static "assets/css/checkout.css"%}" />
 {% endblock %}
-
 
 {% block content %}
 <h1>Оформление заказа</h1>
@@ -87,6 +87,7 @@
   </div>
 </form>
 {% endblock %}
+
 {% block js %}
 <script src={% static "assets/js/checkout.js"%}></script>
 <!-- PayPal JavaScript SDK -->

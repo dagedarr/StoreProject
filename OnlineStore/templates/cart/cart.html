@@ -1,8 +1,10 @@
 {% extends 'base.html' %}
+
 {% load static %}
 {% block css %}
   <link rel="stylesheet" href="{% static "assets/css/cart.css"%}" />
 {% endblock %}
+
 {% block content %}
 <h1>Корзина</h1>
 {% if cart_items %}

@@ -5,6 +5,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from store.models import Item
 from .models import Cart, CartItem
 
+
 @login_required
 def cart(request):
     """
@@ -22,6 +23,7 @@ def cart(request):
     }
 
     return render(request, 'cart/cart.html', context)
+
 
 @login_required
 def add_to_cart(request, item_slug):
@@ -41,6 +43,7 @@ def add_to_cart(request, item_slug):
         cart_item.save()
     return redirect('cart:cart')
 
+
 @login_required
 def delete_cart_item(request, item_slug):
     """
@@ -52,6 +55,7 @@ def delete_cart_item(request, item_slug):
     )
     cart_item.delete()
     return redirect('cart:cart')
+
 
 @login_required
 def update_cart_item(request):

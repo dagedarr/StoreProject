@@ -1,31 +1,28 @@
 {% load static %}
 <header id="header">
     <div class="inner">
-
         <!-- Logo -->
-            <a href="{% url 'store:home' %}" class="logo">
-                <span class="symbol"><img src="{% static "images/logo.svg" %}" alt="" /></span><span class="title">OnlineStore</span>
-            </a>
-
+        <a href="{% url 'store:home' %}" class="logo">
+            <span class="symbol"><img src="{% static "images/logo.svg" %}" alt="" /></span><span class="title">OnlineStore</span>
+        </a>
         <!-- Nav -->
-                <nav>
-                    <ul>
-                        <li><a href="#menu">Menu</a></li>
-                    </ul>
+        <nav>
+            <ul>
+                <li><a href="#menu">Menu</a></li>
+            </ul>
+            <br>
+            <ul class="actions">
+                <li>
+                    <a href="{% url 'cart:cart' %}">
+                    <img src ="{% static "images/cart.jpg" %}" width="40" height="40" ></a>
                     <br>
-                    <ul class="actions">
-                        <li>
-                            <a href="{% url 'cart:cart' %}">
-                            <img src ="{% static "images/cart.jpg" %}" width="40" height="40" ></a>
-                            <br>
-                            <a href="{% url 'users:profile' %}">
-                            <img src ="{% static "images/profile.png" %}" width="40" height="40" ></a>
-                        </li>
-                    </ul>
-                </nav>
+                    <a href="{% url 'users:profile' %}">
+                    <img src ="{% static "images/profile.png" %}" width="40" height="40" ></a>
+                </li>
+            </ul>
+        </nav>
     </div>
 </header>
-
 <!-- Menu -->
 <nav id="menu">
     <h2>Menu</h2>
