@@ -1,0 +1,20 @@
+.form-field {
+    display: flex;
+    align-items: center;
+  }
+  .form-field label {
+    width: 200px;
+    padding-right: 10px;
+  }
+  .form-field input {
+    flex-grow: 1;
+    box-sizing: border-box;
+  }
+
+  .alert-danger {
+    color: red;
+  }
+
+  p {
+    margin-bottom: 5px;
+  }

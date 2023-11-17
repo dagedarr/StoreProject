@@ -1,0 +1,57 @@
+.count {
+    display: flex; 
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    max-width: 45px;
+    max-height:45px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    overflow: hidden;
+    padding: 15px;
+    margin: auto;
+    background: #e0e0e0;
+    border-radius: 30px;
+    -webkit-transition: max-width 0.5s;
+    -moz-transition: max-width 0.5s;
+    -o-transition: max-width 0.5s;
+    transition: max-width 0.5s;
+}
+.count:hover,
+.count.active {
+    max-width: 110px;
+    background: #ffffff;
+    border: 1px #c2c2c2 solid;
+}
+.count:hover input,
+.count.active input {
+    border-bottom: 1px #404040 solid;
+    margin-bottom: -1px;
+}
+.count input {
+    width: 45px;
+    border: none;
+    background: transparent;
+    text-align: center;
+    padding: 0;
+    margin: 0;
+    margin-left: -3px;
+}
+.count span {
+    cursor: pointer;
+}
+.count .minus{
+    font-size: 12px;
+    margin-right: 10px;
+}
+.count .plus{
+    margin-left: 10px;
+}
+input[type='number'] {
+    -moz-appearance:textfield;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
