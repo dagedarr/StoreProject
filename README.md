@@ -24,16 +24,18 @@ source venv/bin/activate
 ```
 pip install -r requirements.txt
 ```
-4. Запустите миграции и загрузите данные в БД
+4. Создайте в корне проекта .env по обазу .env.example
+
+5. Запустите миграции и загрузите данные в БД
 ```
 python manage.py migrate
 python manage.py loaddata data.json
 ```
-5. Создайте администратора магазина
+6. Создайте администратора магазина
 ```
 python manage.py createsuperuser
 ```
-6. Запустите сервер
+7. Запустите сервер
 ```
 python manage.py runserver
 ```
@@ -41,3 +43,11 @@ python manage.py runserver
 
 # Готово!
 Вы успешно установили магазин на Django и готовы начать его использовать!
+
+# Вклад в проект
+Если у вас есть предложения по улучшению или вы обнаружили баг, не стесняйтесь создать issue, отправить pull request либо написать напрямую автору. Ваш вклад приветствуется!
+
+# Автор
+[Натолин Артем](https://github.com/dagedarr)
+
+[Ссылка на еще один мой проект - финансовый ассистент](https://github.com/dagedarr/telegram-budget) 
