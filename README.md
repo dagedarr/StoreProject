@@ -24,9 +24,10 @@ source venv/bin/activate
 ```
 pip install -r requirements.txt
 ```
-4. Запустите миграции
+4. Запустите миграции и загрузите данные в БД
 ```
 python manage.py migrate
+python manage.py loaddata data.json
 ```
 5. Создайте администратора магазина
 ```
